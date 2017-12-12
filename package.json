@@ -1,0 +1,22 @@
+{
+  "name": "cwk",
+  "version": "1.0.0",
+  "description": "Mean stack rest",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "Mean",
+    "RESTFUL",
+    "API",
+    "304"
+  ],
+  "author": "Robert J",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "morgan": "^1.9.0"
+  }
+}
