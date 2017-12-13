@@ -3,7 +3,7 @@ var app = express();
 var morgan = require('morgan');
 var port = process.env.PORT || 8080
 var mongoose = require('mongoose');
-
+var User = require('./app/models/user');
 app.use(morgan('dev'));
 
 mongoose.connect('mongodb://localhost:27017/304db', function(err){
@@ -12,6 +12,10 @@ mongoose.connect('mongodb://localhost:27017/304db', function(err){
   } else {
     console.log('Connected to db')
   }
+});
+// http://localhost:8080
+app.post('/users', function(req, res) {
+  res.send('testing users route');
 });
 
 app.get('/home', function(req, res) {
