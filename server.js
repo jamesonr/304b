@@ -20,11 +20,23 @@ mongoose.connect('mongodb://localhost:27017/304db', function(err){
 // http://localhost:8080/users
 app.post('/users', function(req, res) {
   var user = new User();
+  user.firstname = req.body.firstname;
+  user.surname = req.body.surname;
   user.username = req.body.username;
   user.password = req.body.password;
   user.email = req.body.email;
-  user.save();
-  res.send('user created!');
+if (req.body.firstname == null || req.body.firstname == '' || req.body.surname == null || req.body.surname == '' req.body.req.body.username == null || req.body.username == '' || req.body.password == null || req.body.password == ''
+|| req.body.email == null || req.body.email == '') {
+  res.send('Ensure all fields were probided ')
+
+} else {
+  user.save(function(err){
+  if (err) {
+    res.send('Username/Email already exists');
+  } else {res.send('user created!');
+}
+  });
+}
 });
 
 app.get('/home', function(req, res) {
