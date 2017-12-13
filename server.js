@@ -12,7 +12,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(express.static(__dirname + '/../front/public'));
-app.use('/api',Routes);
+app.use('/api', Routes);
 // '/api' stops frontend + backend conflicts
 mongoose.connect('mongodb://localhost:27017/304db', function(err){
   if (err) {
@@ -26,11 +26,6 @@ app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname + '/../front/public/app/views/index.html'));
 })
 // http://localhost:8080/users
-
-
-app.get('/home', function(req, res) {
-  res.send('hello test');
-});
 
 app.listen(port, function() {
     console.log('Running the server on port' + port);
