@@ -19,20 +19,22 @@ module.exports = function(router) {
     } else {
       user.save(function(err) {
         if (err) {
-          res.json({
-            success: false,
-            message: 'Username or Email already exists'
-          });
+          if(err.errors.firstname) {
+            res.json({ success: false, message: err.errors.name.message});
+          } else if (err.errors.email) {
+            res.json({ success: false, message: err.errors.email.message});
+          } else if (err.errors.username) {
+            res.json({ success: false, message: err.errors.username.message});
+          } if (err.errors.password) {
+            res.json({ success: false, message: err.errors.password.message});
+          }
         } else {
-          res.json({
-            success: true,
-            message: 'User Created'
-          });
+          res.json({ success: true, message: 'user created!'});
+
         }
       });
     }
   });
-
   //User Login Route
   router.post('/authenticate', function(req, res) {
 
