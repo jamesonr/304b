@@ -19,16 +19,26 @@ module.exports = function(router) {
     } else {
       user.save(function(err) {
         if (err) {
-          if(err.errors.firstname) {
-            res.json({ success: false, message: err.errors.name.message});
+          if (err.errors !=null) {
+            if (err.errors.firstname) {
+              res.json({ success: false, message: err.errors.name.message});
           } else if (err.errors.email) {
-            res.json({ success: false, message: err.errors.email.message});
+              res.json({ success: false, message: err.errors.email.message});
           } else if (err.errors.username) {
-            res.json({ success: false, message: err.errors.username.message});
-          } if (err.errors.password) {
-            res.json({ success: false, message: err.errors.password.message});
+              res.json({ success: false, message: err.errors.username.message});
+          } else if (err.errors.password) {
+              res.json({ success: false, message: err.errors.password.message});
+          } else {
+              res.json({ success: false, message: err });
           }
-        } else {
+        } else if (err) {
+            if (err.code == 11000) {
+              res.json({ success: false, message: "Username or e-mail already taken"});
+            } else {
+                res.json({ success: false, message: err });
+            }
+        }
+      }  else {
           res.json({ success: true, message: 'user created!'});
 
         }
