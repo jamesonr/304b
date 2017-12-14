@@ -33,9 +33,14 @@ module.exports = function(router) {
           }
         } else if (err) {
             if (err.code == 11000) {
+              if(err.errmsg[61] == "u") {
+                res.json({ success: false, message: 'That username is already taken'});
+              } else if (err.errmsg[61] == "e") { //u for username
               res.json({ success: false, message: "Username or e-mail already taken"});
+              }
+              res.json({ success: false, message: errmsg[61] });
             } else {
-                res.json({ success: false, message: err });
+              res.json({ success: false, message: err });
             }
         }
       }  else {
