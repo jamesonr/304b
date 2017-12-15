@@ -133,6 +133,9 @@ module.exports = function(router) {
 
   //User Login Route
   router.post('/authenticate', function(req, res) {
+    var promptedPassword = req.body.password;
+    var promptedUsername = req.body.username;
+    var promptedEmail = req.body.email;
     User.findOne({
       username: promptedUsername
     }).select('email username password').exec(function(err, user) {
